@@ -1,11 +1,3 @@
----
-title: Demand Forecasting
-emoji: 📦
-colorFrom: blue
-colorTo: green
-sdk: docker
-app_port: 7860
----
 
 # 28-Day Demand Forecasting (Walmart M5)
 
@@ -32,7 +24,7 @@ WAPE = total absolute error ÷ total units sold. Lower is better.
 2. **Features** (`src/features.py`): 13 features. These are sales 28/35/42 days ago, 7- and 28-day average sales, price and week-on-week price change, weekday, month, event and SNAP flags, and product/department IDs. Every sales feature looks back **at least 28 days**, so the model only uses what would be known on the day the forecast is made.
 3. **Model** (`src/train.py`): one XGBoost model for all products. Time-based split: train up to day 1885, validate on the next 28 days (early stopping), test on the final 28 days.
 4. **Tracking**: every run is logged to **MLflow** (parameters and metrics).
-5. **Dashboard** (`app/app.py`): a Streamlit app comparing forecast vs actual sales by department or item. It runs in **Docker** on Hugging Face Spaces.
+5. **Dashboard** (`app/app.py`): a Streamlit app comparing forecast vs actual sales by department or item. Deployed on Streamlit Community Cloud; a `Dockerfile` is included to run it anywhere in a container.
 
 ## Experiments (tracked in MLflow)
 
